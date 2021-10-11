@@ -1,6 +1,6 @@
 # reminDMe
-Приложения для заметок
-## в проекте используеться 
+trial note-taking app to study anrdoid compose
+## the project uses 
 #### android compose 
 #### MVVM
 #### clean architecture
