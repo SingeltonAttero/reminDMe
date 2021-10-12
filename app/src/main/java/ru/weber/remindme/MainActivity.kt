@@ -1,28 +1,56 @@
 package ru.weber.remindme
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.weber.remindme.ui.theme.RemindMeTheme
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            RemindMeTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+            RemindMeDark()
+        }
+    }
+}
+
+@Composable
+private fun Activity.RemindMeDark(activityViewModel: MainActivityViewModel = viewModel()) {
+    val stateTheme = activityViewModel.themeState.collectAsState(initial = isSystemInDarkTheme())
+    RemindMeTheme(darkTheme = stateTheme.value) {
+        window.statusBarColor = MaterialTheme.colors.primary.toArgb()
+        window.navigationBarColor = MaterialTheme.colors.primary.toArgb()
+        Surface(
+            modifier = Modifier
+                .clickable {
+                    activityViewModel.changeTheme()
                 }
+                .fillMaxSize(),
+
+            color = MaterialTheme.colors.background) {
+            Box(contentAlignment = Alignment.Center) {
+                Greeting("Android")
             }
         }
     }
 }
+
 
 @Composable
 fun Greeting(name: String) {
