@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-class MainActivityViewModel : ViewModel() {
+class RemindMeViewModel : ViewModel() {
     private val themeAction = MutableStateFlow(false)
     val themeState: Flow<Boolean>
         get() = themeAction

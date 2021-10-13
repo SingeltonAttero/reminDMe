@@ -6,7 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -18,6 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
+import ru.weber.remindme.component.task.TaskTextItemView
+import ru.weber.remindme.component.task.state.TaskStateMock
 import ru.weber.remindme.ui.theme.RemindMeTheme
 
 class MainActivity : ComponentActivity() {
@@ -31,7 +33,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun Activity.RemindMeDark(activityViewModel: MainActivityViewModel = viewModel()) {
+private fun Activity.RemindMeDark(activityViewModel: RemindMeViewModel = viewModel()) {
     val stateTheme = activityViewModel.themeState.collectAsState(initial = isSystemInDarkTheme())
     RemindMeTheme(darkTheme = stateTheme.value) {
         window.statusBarColor = MaterialTheme.colors.primary.toArgb()
@@ -44,8 +46,10 @@ private fun Activity.RemindMeDark(activityViewModel: MainActivityViewModel = vie
                 .fillMaxSize(),
 
             color = MaterialTheme.colors.background) {
-            Box(contentAlignment = Alignment.Center) {
-                Greeting("Android")
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                TaskStateMock.taskTextMock.forEach {
+                    TaskTextItemView(state = it, Modifier)
+                }
             }
         }
     }

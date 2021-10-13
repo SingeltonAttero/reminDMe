@@ -7,15 +7,19 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 
 private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = PrimaryDark,
+    primaryVariant = PrimaryVariantDark,
+    secondary = PrimaryAccentDark,
+    background = PrimaryVariantDark,
+    error = PrimaryTextErrorDark
 )
 
 private val LightColorPalette = lightColors(
-    primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = PrimaryLight,
+    primaryVariant = PrimaryVariantLight,
+    secondary = PrimaryAccentLight,
+    background = PrimaryVariantLight,
+    error = PrimaryTextErrorLight
 )
 
 @Composable
@@ -26,9 +30,11 @@ fun RemindMeTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composab
         LightColorPalette
     }
 
+    val typography = if (darkTheme) TypographyDark else TypographyLight
+
     MaterialTheme(
         colors = colors,
-        typography = Typography,
+        typography = typography,
         shapes = Shapes,
         content = content
     )
