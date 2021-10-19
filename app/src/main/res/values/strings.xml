@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">remind me</string>
+    <!--toolbar title-->
+    <string name="toolbar_home_title_start_screen">Задачи</string>
+    <string name="toolbar_setting_title_start_screen">Настройки</string>
+    <string name="toolbar_history_title_start_screen">История</string>
+    <string name="toolbar_statistic_title_start_screen">Статистика</string>
 </resources>
