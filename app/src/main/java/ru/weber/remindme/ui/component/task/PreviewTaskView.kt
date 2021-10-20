@@ -1,11 +1,11 @@
-package ru.weber.remindme.component.task
+package ru.weber.remindme.ui.component.task
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import ru.weber.remindme.component.task.state.TaskStateMock
+import ru.weber.remindme.ui.component.task.state.TaskStateMock
 import ru.weber.remindme.ui.theme.RemindMeTheme
 
 

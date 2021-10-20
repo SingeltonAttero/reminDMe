@@ -39,7 +39,9 @@ private fun Activity.RemindMeDark(activityViewModel: RemindMeViewModel = viewMod
             startDestination = FlowScreens.StartScreen.screenName
         ) {
             composable(FlowScreens.StartScreen.screenName) {
-                BottomFlowStartScreen(navController)
+                BottomFlowStartScreen(
+                    activityViewModel = activityViewModel
+                )
             }
         }
     }

@@ -1,4 +1,4 @@
-package ru.weber.remindme.component.task
+package ru.weber.remindme.ui.component.task
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box
@@ -13,8 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import ru.weber.remindme.component.task.state.TaskState
-import ru.weber.remindme.component.task.state.TaskStatus
+import ru.weber.remindme.ui.component.task.state.TaskState
+import ru.weber.remindme.ui.component.task.state.TaskStatus
 
 @Composable
 fun TaskTextItemView(

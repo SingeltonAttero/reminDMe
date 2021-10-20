@@ -1,4 +1,4 @@
-package ru.weber.remindme.component.task.state
+package ru.weber.remindme.ui.component.task.state
 
 object TaskStateMock {
     val taskTextMock = listOf(
