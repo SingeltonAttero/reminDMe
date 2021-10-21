@@ -11,12 +11,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.weber.remindme.R
-import ru.weber.remindme.RemindMeViewModel
 import ru.weber.remindme.ui.feature.screens.BottomStartScreens
 
 @Composable
-fun SettingScreen(activityViewModel: RemindMeViewModel) {
-    val stateTheme = activityViewModel.themeState.collectAsState(true)
+fun SettingScreen(settingViewModel: SettingViewModel) {
+    val stateTheme = settingViewModel.themeState.collectAsState(true)
     Scaffold(topBar = {
         TopAppBar(backgroundColor = MaterialTheme.colors.primaryVariant) {
             Text(
@@ -32,7 +31,9 @@ fun SettingScreen(activityViewModel: RemindMeViewModel) {
             shape = MaterialTheme.shapes.small,
             modifier = Modifier
                 .padding(vertical = 16.dp, horizontal = 6.dp)
-                .clickable { activityViewModel.changeTheme() },
+                .clickable {
+                    settingViewModel.changeTheme(!stateTheme.value)
+                },
             backgroundColor = MaterialTheme.colors.primaryVariant,
             elevation = 8.dp
         ) {
@@ -44,7 +45,7 @@ fun SettingScreen(activityViewModel: RemindMeViewModel) {
                     text = stringResource(id = R.string.dark_theme_mode_title)
                 )
                 Switch(checked = stateTheme.value, onCheckedChange = {
-                    activityViewModel.changeTheme()
+                    settingViewModel.changeTheme(it)
                 })
             }
         }

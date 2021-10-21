@@ -12,18 +12,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import ru.weber.remindme.RemindMeViewModel
 import ru.weber.remindme.ui.feature.screens.BottomStartScreens
 import ru.weber.remindme.ui.feature.setting.SettingScreen
+import ru.weber.remindme.ui.feature.setting.SettingViewModel
 
 @Composable
 fun BottomFlowStartScreen(
-    activityViewModel: RemindMeViewModel,
     bottomScreens: List<BottomStartScreens> = listOf(
         BottomStartScreens.Home,
         BottomStartScreens.History,
@@ -32,6 +32,7 @@ fun BottomFlowStartScreen(
     )
 ) {
     val bottomNavController = rememberNavController()
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize(),
@@ -57,7 +58,10 @@ fun BottomFlowStartScreen(
                 }
             }
             composable(BottomStartScreens.Setting.screenName) {
-                SettingScreen(activityViewModel = activityViewModel)
+                val settingViewModel = hiltViewModel<SettingViewModel>()
+                SettingScreen(
+                    settingViewModel = settingViewModel
+                )
             }
         }
     }
@@ -78,7 +82,9 @@ private fun StartBottomBar(
             BottomNavigationItem(
                 selected = screen.screenName == currentRoute,
                 onClick = {
-                    bottomNavController.navigate(screen.screenName)
+                    if (screen.screenName != currentRoute) {
+                        bottomNavController.navigate(screen.screenName)
+                    }
                 },
                 icon = {
                     Icon(
