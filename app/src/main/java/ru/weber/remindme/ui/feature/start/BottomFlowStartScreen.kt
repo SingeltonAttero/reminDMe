@@ -2,6 +2,7 @@ package ru.weber.remindme.ui.feature.start
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -12,7 +13,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -20,12 +20,12 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import ru.weber.remindme.ui.feature.screens.BottomStartScreens
 import ru.weber.remindme.ui.feature.setting.SettingScreen
-import ru.weber.remindme.ui.feature.setting.SettingViewModel
+import ru.weber.remindme.ui.feature.tasks.TasksScreen
 
 @Composable
 fun BottomFlowStartScreen(
     bottomScreens: List<BottomStartScreens> = listOf(
-        BottomStartScreens.Home,
+        BottomStartScreens.Tasks,
         BottomStartScreens.History,
         BottomStartScreens.Statistics,
         BottomStartScreens.Setting,
@@ -34,34 +34,33 @@ fun BottomFlowStartScreen(
     val bottomNavController = rememberNavController()
 
     Scaffold(
-        modifier = Modifier
-            .fillMaxSize(),
         bottomBar = { StartBottomBar(bottomNavController, bottomScreens) },
-    ) {
-        NavHost(
-            navController = bottomNavController,
-            startDestination = BottomStartScreens.Home.screenName
-        ) {
-            composable(BottomStartScreens.Home.screenName) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text(text = BottomStartScreens.Home.screenName)
+        contentColor = Color.White,
+    ) { contentPadding ->
+        Box(Modifier.padding(contentPadding)) {
+            NavHost(
+                navController = bottomNavController,
+                startDestination = BottomStartScreens.Tasks.screenKey
+            ) {
+                composable(BottomStartScreens.Tasks.screenKey) {
+                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        TasksScreen()
+                    }
                 }
-            }
-            composable(BottomStartScreens.History.screenName) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
-                    Text(text = BottomStartScreens.History.screenName)
+                composable(BottomStartScreens.History.screenKey) {
+                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
+                        Text(text = BottomStartScreens.History.screenKey)
+                    }
                 }
-            }
-            composable(BottomStartScreens.Statistics.screenName) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
-                    Text(text = BottomStartScreens.Statistics.screenName)
+                composable(BottomStartScreens.Statistics.screenKey) {
+                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
+                        Text(text = BottomStartScreens.Statistics.screenKey)
+                        listOf<String>().firstOrNull()
+                    }
                 }
-            }
-            composable(BottomStartScreens.Setting.screenName) {
-                val settingViewModel = hiltViewModel<SettingViewModel>()
-                SettingScreen(
-                    settingViewModel = settingViewModel
-                )
+                composable(BottomStartScreens.Setting.screenKey) {
+                    SettingScreen()
+                }
             }
         }
     }
@@ -80,10 +79,11 @@ private fun StartBottomBar(
         val currentRoute = currentRoute(navController = bottomNavController)
         bottomScreens.forEach { screen ->
             BottomNavigationItem(
-                selected = screen.screenName == currentRoute,
+                selected = screen.screenKey == currentRoute,
                 onClick = {
-                    if (screen.screenName != currentRoute) {
-                        bottomNavController.navigate(screen.screenName)
+                    if (screen.screenKey != currentRoute) {
+                        bottomNavController.popBackStack()
+                        bottomNavController.navigate(screen.screenKey)
                     }
                 },
                 icon = {

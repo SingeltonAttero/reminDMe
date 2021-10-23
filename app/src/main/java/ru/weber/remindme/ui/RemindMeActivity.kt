@@ -39,9 +39,9 @@ private fun Activity.RemindMeDark(activityViewModel: RemindMeViewModel) {
         val navController = rememberNavController()
         NavHost(
             navController = navController,
-            startDestination = FlowScreens.StartScreen.screenName
+            startDestination = FlowScreens.StartScreen.screenKey
         ) {
-            composable(FlowScreens.StartScreen.screenName) {
+            composable(FlowScreens.StartScreen.screenKey) {
                 BottomFlowStartScreen()
             }
         }

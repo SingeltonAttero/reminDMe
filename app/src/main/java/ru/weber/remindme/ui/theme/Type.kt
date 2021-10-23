@@ -14,10 +14,10 @@ val TypographyDark = Typography(
         fontSize = 16.sp
     ),
     h6 = TextStyle(
+        color = SurfaceDark,
         fontWeight = FontWeight.Medium,
         fontSize = 20.sp,
-        letterSpacing = 0.sp,
-        color = SurfaceDark
+        letterSpacing = 0.sp
     ),
     overline = TextStyle(
         fontWeight = FontWeight.Normal,

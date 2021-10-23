@@ -9,7 +9,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import ru.weber.remindme.data.ProtoDataStoreSettingRepository
+import ru.weber.remindme.data.setting.ProtoDataStoreSettingRepository
 import ru.weber.remindme.data.datastore.AppSetting
 import ru.weber.remindme.data.datastore.AppSettingDataStoreProvider
 import ru.weber.remindme.data.datastore.AppSettingSerializer

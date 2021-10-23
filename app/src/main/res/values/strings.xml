@@ -5,5 +5,6 @@
     <string name="toolbar_setting_title_start_screen">Настройки</string>
     <string name="toolbar_history_title_start_screen">История</string>
     <string name="toolbar_statistic_title_start_screen">Статистика</string>
-    <string name="dark_theme_mode_title">Темный режим</string>
+    <string name="dark_theme_mode_title">Темный тема</string>
+    <string name="new_task">Новая задача</string>
 </resources>

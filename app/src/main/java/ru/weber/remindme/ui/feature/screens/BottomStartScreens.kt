@@ -10,8 +10,8 @@ sealed class BottomStartScreens(
     @DrawableRes val bottomIconDrawable: Int
 ) : FlowScreens(screenName, titleToolbarRes) {
 
-    object Home : BottomStartScreens(
-        screenName = Home::class.java.name,
+    object Tasks : BottomStartScreens(
+        screenName = Tasks::class.java.name,
         titleToolbarRes = R.string.toolbar_home_title_start_screen,
         bottomIconDrawable = R.drawable.ic_bottom_home
     )

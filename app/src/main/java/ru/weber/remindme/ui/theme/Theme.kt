@@ -10,6 +10,7 @@ private val DarkColorPalette = darkColors(
     primary = PrimaryDark,
     primaryVariant = PrimaryVariantDark,
     surface = SurfaceDark,
+    onSurface = PrimaryTextDark,
     secondary = PrimaryAccentDark,
     background = PrimaryVariantDark,
     error = PrimaryTextErrorDark
@@ -19,13 +20,14 @@ private val LightColorPalette = lightColors(
     primary = PrimaryLight,
     primaryVariant = PrimaryVariantLight,
     surface = SurfaceLight,
+    onSurface = PrimaryTextLight,
     secondary = PrimaryAccentLight,
     background = PrimaryVariantLight,
     error = PrimaryTextErrorLight
 )
 
 @Composable
-fun RemindMeTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
+fun RemindMeTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {

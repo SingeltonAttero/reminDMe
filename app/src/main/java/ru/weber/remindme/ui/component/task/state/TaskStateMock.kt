@@ -7,4 +7,10 @@ object TaskStateMock {
         TaskState.TextItem("Полить цветы", status = TaskStatus.CANCELED),
     )
 
+    val taskCheckboxMock = listOf(
+        TaskState.CheckBoxItem(true, "Сделать зарядку?", status = TaskStatus.COMPLETE),
+        TaskState.CheckBoxItem(false, "Купить молоко?", status = TaskStatus.PROCESS),
+        TaskState.CheckBoxItem(false, "Полить цветы?", status = TaskStatus.CANCELED),
+    )
+
 }

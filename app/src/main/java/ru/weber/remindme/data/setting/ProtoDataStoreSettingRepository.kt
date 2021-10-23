@@ -1,4 +1,4 @@
-package ru.weber.remindme.data
+package ru.weber.remindme.data.setting
 
 import kotlinx.coroutines.flow.Flow
 import ru.weber.remindme.data.datastore.AppSettingDataStoreProvider
