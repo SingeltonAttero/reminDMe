@@ -35,14 +35,15 @@ fun AppSwitch(
     Card(
         shape = MaterialTheme.shapes.small,
         modifier = Modifier
-            .padding(vertical = 16.dp, horizontal = 6.dp)
-            .clickable {
-                onCheckedChange.invoke(!checked)
-            },
+            .padding(vertical = 16.dp, horizontal = 6.dp),
         backgroundColor = MaterialTheme.colors.primaryVariant,
         elevation = 8.dp
     ) {
-        Row(modifier = Modifier.padding(16.dp)) {
+        Row(modifier = Modifier
+            .clickable {
+                onCheckedChange.invoke(!checked)
+            }
+            .padding(16.dp)) {
             Text(
                 modifier = Modifier
                     .weight(1F)

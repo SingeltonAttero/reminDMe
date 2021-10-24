@@ -1,7 +1,7 @@
 package ru.weber.remindme.ui.feature.tasks
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.FabPosition
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -13,38 +13,47 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import ru.weber.remindme.ui.component.fab.AppFab
 import ru.weber.remindme.ui.component.task.TaskCheckboxItemView
 import ru.weber.remindme.ui.component.task.TaskTextItemView
-import ru.weber.remindme.ui.component.task.state.TaskStateMock
-import ru.weber.remindme.ui.component.task.state.TaskStateMock.taskCheckboxMock
+import ru.weber.remindme.ui.component.task.state.TaskState
 import ru.weber.remindme.ui.component.toolbar.AppToolbar
 import ru.weber.remindme.ui.component.toolbar.ToolbarTitle
 import ru.weber.remindme.ui.feature.screens.BottomStartScreens
 
 @Composable
 fun TasksScreen(viewModel: TasksViewModel = hiltViewModel()) {
-    val fabState = viewModel.state.collectAsState()
+    val screenState = viewModel.state.collectAsState()
     Scaffold(
         topBar = {
             AppToolbar(toolbarTitle = ToolbarTitle(BottomStartScreens.Tasks.titleToolbarRes))
         },
         floatingActionButton = {
-            AppFab(state = fabState.value) {
+            AppFab(state = screenState.value.fabState) {
 
             }
         },
         floatingActionButtonPosition = FabPosition.End
     ) { paddingValue ->
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .padding(paddingValue)
                 .padding(vertical = 12.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            TaskStateMock.taskTextMock.forEach {
-                TaskTextItemView(state = it, Modifier)
-            }
-
-            taskCheckboxMock.forEach {
-                TaskCheckboxItemView(state = it, Modifier)
+            screenState.value.tasksItems.forEach { taskState ->
+                item {
+                    when (taskState) {
+                        is TaskState.CheckBoxItem -> TaskCheckboxItemView(
+                            state = taskState,
+                            modifier = Modifier,
+                            checked = {
+                                viewModel.doneTask(taskState, it)
+                            }
+                        )
+                        is TaskState.TextItem -> TaskTextItemView(
+                            state = taskState,
+                            modifier = Modifier
+                        )
+                    }
+                }
             }
         }
     }
