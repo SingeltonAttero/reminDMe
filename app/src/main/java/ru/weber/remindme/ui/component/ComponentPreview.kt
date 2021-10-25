@@ -8,7 +8,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import ru.weber.remindme.ui.component.task.state.TaskStateMock
 import ru.weber.remindme.ui.component.toolbar.AppToolbar
 import ru.weber.remindme.ui.component.toolbar.ToolbarTitle
-import ru.weber.remindme.ui.feature.screens.BottomStartScreens
+import ru.weber.remindme.ui.screens.BottomStartScreens
 import ru.weber.remindme.ui.theme.*
 
 
@@ -40,19 +40,33 @@ fun DefaultPreviewDark() {
 @Composable
 @Preview(showBackground = true)
 private fun AppBarDarkPreview() {
-    AppToolbar(
-        toolbarTitle = ToolbarTitle(BottomStartScreens.Setting.titleToolbarRes),
-        backgroundColor = PrimaryVariantDark,
-        style = TypographyDark.h6
-    )
+    Column() {
+        AppToolbar(
+            toolbarTitle = ToolbarTitle(BottomStartScreens.Setting.titleToolbarRes, false),
+            backgroundColor = PrimaryVariantDark,
+            style = TypographyDark.h6
+        )
+        AppToolbar(
+            toolbarTitle = ToolbarTitle(BottomStartScreens.Setting.titleToolbarRes, true),
+            backgroundColor = PrimaryVariantDark,
+            style = TypographyDark.h6
+        )
+    }
 }
 
 @Composable
 @Preview(showBackground = true)
 private fun AppBarLightPreview() {
-    AppToolbar(
-        toolbarTitle = ToolbarTitle(BottomStartScreens.Setting.titleToolbarRes),
-        backgroundColor = PrimaryVariantLight,
-        style = TypographyLight.h6
-    )
+    Column() {
+        AppToolbar(
+            toolbarTitle = ToolbarTitle(BottomStartScreens.Setting.titleToolbarRes, false),
+            backgroundColor = PrimaryVariantLight,
+            style = TypographyLight.h6,
+        )
+        AppToolbar(
+            toolbarTitle = ToolbarTitle(BottomStartScreens.Setting.titleToolbarRes, true),
+            backgroundColor = PrimaryVariantLight,
+            style = TypographyLight.h6
+        )
+    }
 }

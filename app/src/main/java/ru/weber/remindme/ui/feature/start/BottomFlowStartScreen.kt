@@ -18,12 +18,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import ru.weber.remindme.ui.feature.screens.BottomStartScreens
 import ru.weber.remindme.ui.feature.setting.SettingScreen
 import ru.weber.remindme.ui.feature.tasks.TasksScreen
+import ru.weber.remindme.ui.screens.BottomStartScreens
 
 @Composable
 fun BottomFlowStartScreen(
+    mainNavController: NavHostController,
     bottomScreens: List<BottomStartScreens> = listOf(
         BottomStartScreens.Tasks,
         BottomStartScreens.History,
@@ -44,7 +45,7 @@ fun BottomFlowStartScreen(
             ) {
                 composable(BottomStartScreens.Tasks.screenKey) {
                     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        TasksScreen()
+                        TasksScreen(mainNavController)
                     }
                 }
                 composable(BottomStartScreens.History.screenKey) {
@@ -82,8 +83,9 @@ private fun StartBottomBar(
                 selected = screen.screenKey == currentRoute,
                 onClick = {
                     if (screen.screenKey != currentRoute) {
-                        bottomNavController.popBackStack()
-                        bottomNavController.navigate(screen.screenKey)
+                        bottomNavController.navigate(screen.screenKey) {
+                            popUpTo(BottomStartScreens.Tasks.screenKey)
+                        }
                     }
                 },
                 icon = {

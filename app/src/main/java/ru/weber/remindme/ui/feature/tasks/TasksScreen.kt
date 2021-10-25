@@ -10,16 +10,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import ru.weber.remindme.ui.component.fab.AppFab
 import ru.weber.remindme.ui.component.task.TaskCheckboxItemView
 import ru.weber.remindme.ui.component.task.TaskTextItemView
 import ru.weber.remindme.ui.component.task.state.TaskState
 import ru.weber.remindme.ui.component.toolbar.AppToolbar
 import ru.weber.remindme.ui.component.toolbar.ToolbarTitle
-import ru.weber.remindme.ui.feature.screens.BottomStartScreens
+import ru.weber.remindme.ui.screens.BottomStartScreens
+import ru.weber.remindme.ui.screens.FlowScreens
 
 @Composable
-fun TasksScreen(viewModel: TasksViewModel = hiltViewModel()) {
+fun TasksScreen(
+    navController: NavHostController,
+    viewModel: TasksViewModel = hiltViewModel()
+) {
     val screenState = viewModel.state.collectAsState()
     Scaffold(
         topBar = {
@@ -27,7 +32,7 @@ fun TasksScreen(viewModel: TasksViewModel = hiltViewModel()) {
         },
         floatingActionButton = {
             AppFab(state = screenState.value.fabState) {
-
+                navController.navigate(FlowScreens.Task.screenKey)
             }
         },
         floatingActionButtonPosition = FabPosition.End

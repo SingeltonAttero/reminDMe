@@ -1,4 +1,4 @@
-package ru.weber.remindme.ui.feature.screens
+package ru.weber.remindme.ui.screens
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

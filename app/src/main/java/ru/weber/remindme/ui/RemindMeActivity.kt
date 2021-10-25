@@ -13,8 +13,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
-import ru.weber.remindme.ui.feature.screens.FlowScreens
 import ru.weber.remindme.ui.feature.start.BottomFlowStartScreen
+import ru.weber.remindme.ui.feature.task.detailed.TaskDetailedScreen
+import ru.weber.remindme.ui.screens.FlowScreens
 import ru.weber.remindme.ui.theme.RemindMeTheme
 import kotlin.random.Random
 
@@ -39,10 +40,16 @@ private fun Activity.RemindMeDark(activityViewModel: RemindMeViewModel) {
         val navController = rememberNavController()
         NavHost(
             navController = navController,
-            startDestination = FlowScreens.StartScreen.screenKey
+            startDestination = FlowScreens.Start.screenKey
         ) {
-            composable(FlowScreens.StartScreen.screenKey) {
-                BottomFlowStartScreen()
+            composable(FlowScreens.Start.screenKey) {
+                BottomFlowStartScreen(mainNavController = navController)
+            }
+
+            composable(FlowScreens.Task.screenKey) {
+                TaskDetailedScreen() {
+                    navController.popBackStack()
+                }
             }
         }
     }

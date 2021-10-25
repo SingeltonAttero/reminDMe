@@ -8,7 +8,7 @@ import ru.weber.remindme.R
 import ru.weber.remindme.ui.component.switch.AppSwitch
 import ru.weber.remindme.ui.component.toolbar.AppToolbar
 import ru.weber.remindme.ui.component.toolbar.ToolbarTitle
-import ru.weber.remindme.ui.feature.screens.BottomStartScreens
+import ru.weber.remindme.ui.screens.BottomStartScreens
 
 @Composable
 fun SettingScreen(settingViewModel: SettingViewModel = hiltViewModel()) {
