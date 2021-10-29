@@ -1,60 +1,83 @@
 package ru.weber.remindme.ui.feature.task.detailed
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Icon
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import ru.weber.remindme.R
+import ru.weber.remindme.ui.component.datepicker.DatePickerDialog
 import ru.weber.remindme.ui.component.toolbar.AppToolbar
 import ru.weber.remindme.ui.component.toolbar.ToolbarTitle
+import ru.weber.remindme.ui.feature.task.detailed.state.TaskDetailedState
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun TaskDetailedScreen(
+    navHostController: NavHostController,
+    titleTask: String,
     viewModel: TaskDetailedViewModel = hiltViewModel(),
-    closeScreen: () -> Unit
-) {
-    val (text, value) = rememberSaveable {
-        mutableStateOf("")
-    }
 
+    ) {
+    val state = viewModel.state.collectAsState().value
+    val dialogState = viewModel.commandOpenDialog.collectAsState(initial = false).value
     Scaffold(
         topBar = {
-            AppToolbar(toolbarTitle = ToolbarTitle(R.string.create_new_task, true)) {
-                closeScreen.invoke()
+            AppToolbar(toolbarTitle = ToolbarTitle(title = titleTask, true)) {
+                navHostController.popBackStack()
             }
         }
     ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .padding(paddingValues)
-                .padding(horizontal = 16.dp, vertical = 16.dp)
-        ) {
-            OutlinedTextField(
-                modifier = Modifier.fillMaxSize(),
-                value = text,
-                onValueChange = value::invoke,
-                label = {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Default.ThumbUp, contentDescription = "")
-                        Text(
-                            modifier = Modifier.padding(start = 16.dp),
-                            text = "Что нужно сделать?"
-                        )
+        if (state is TaskDetailedState.Result) {
+            Column(
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .padding(horizontal = 16.dp, vertical = 16.dp)
+            ) {
+                OutlinedTextField(
+                    modifier = Modifier.fillMaxWidth(),
+                    value = state.textValue,
+                    onValueChange = viewModel::setTextValues,
+                    label = {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(
+                                modifier = Modifier.padding(start = 16.dp),
+                                text = stringResource(R.string.write_what_do_it_hint)
+                            )
+                        }
+                    })
+
+                if (dialogState) {
+                    DatePickerDialog(onDateSelected = {
+                        viewModel.setLocalDate(it)
+                    }) {
+                        viewModel.commandDialog(false)
                     }
-                })
+                } else {
+                    Text(modifier = Modifier.clickable {
+                        viewModel.commandDialog(true)
+                    }, text = state.localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
+                }
+
+            }
+        } else {
+            Box(
+                modifier = Modifier
+                    .padding(paddingValues = paddingValues)
+                    .fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                LinearProgressIndicator()
+            }
         }
     }
 }

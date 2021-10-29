@@ -8,9 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import ru.weber.remindme.R
 import ru.weber.remindme.ui.component.fab.AppFab
 import ru.weber.remindme.ui.component.task.TaskCheckboxItemView
 import ru.weber.remindme.ui.component.task.TaskTextItemView
@@ -31,8 +33,9 @@ fun TasksScreen(
             AppToolbar(toolbarTitle = ToolbarTitle(BottomStartScreens.Tasks.titleToolbarRes))
         },
         floatingActionButton = {
+            val navArgTask = stringResource(id = R.string.create_new_task)
             AppFab(state = screenState.value.fabState) {
-                navController.navigate(FlowScreens.Task.screenKey)
+                navController.navigate("${FlowScreens.Task.screenKey}/${navArgTask}")
             }
         },
         floatingActionButtonPosition = FabPosition.End

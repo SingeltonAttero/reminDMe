@@ -9,9 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.graphics.toArgb
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
 import ru.weber.remindme.ui.feature.start.BottomFlowStartScreen
 import ru.weber.remindme.ui.feature.task.detailed.TaskDetailedScreen
@@ -46,11 +48,13 @@ private fun Activity.RemindMeDark(activityViewModel: RemindMeViewModel) {
                 BottomFlowStartScreen(mainNavController = navController)
             }
 
-            composable(FlowScreens.Task.screenKey) {
-                TaskDetailedScreen() {
-                    navController.popBackStack()
-                }
+            val argTaskId = "titleTask"
+            composable("${FlowScreens.Task.screenKey}/{$argTaskId}", arguments = listOf(
+                navArgument(argTaskId) { type = NavType.StringType }
+            )) {
+                TaskDetailedScreen(navController, it.arguments?.getString(argTaskId).orEmpty())
             }
         }
     }
 }
+

@@ -10,4 +10,5 @@ sealed class FlowScreens(
     object Start : FlowScreens(Start::class.java.simpleName, R.string.app_name)
 
     object Task : FlowScreens(Task::class.java.simpleName, R.string.app_name)
+
 }

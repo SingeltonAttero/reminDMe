@@ -8,4 +8,8 @@
     <string name="dark_theme_mode_title">Темный тема</string>
     <string name="new_task">Новая задача</string>
     <string name="create_new_task">Добавить новую задачу</string>
+    <string name="write_what_do_it_hint">Запишите что нужно сделать</string>
+    <string name="select_date_remind">Выберите дату напоминания</string>
+    <string name="cancel">Отмена</string>
+    <string name="select">Выбрать</string>
 </resources>

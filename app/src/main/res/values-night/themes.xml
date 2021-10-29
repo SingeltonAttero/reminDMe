@@ -21,4 +21,12 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+
+    <style name="CalenderViewCustom"
+        parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorAccent">?attr/colorAccent</item>
+        <item name="colorOnPrimary">?attr/colorOnPrimary</item>
+        <item name="colorSurface">?attr/colorSurface</item>
+    </style>
 </resources>
