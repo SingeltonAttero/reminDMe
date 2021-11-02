@@ -15,9 +15,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import ru.weber.remindme.R
-import ru.weber.remindme.ui.component.datepicker.DatePickerDialog
 import ru.weber.remindme.ui.component.toolbar.AppToolbar
 import ru.weber.remindme.ui.component.toolbar.ToolbarTitle
+import ru.weber.remindme.ui.feature.datepicker.DatePickerDialog
 import ru.weber.remindme.ui.feature.task.detailed.state.TaskDetailedState
 import java.time.format.DateTimeFormatter
 
@@ -59,15 +59,14 @@ fun TaskDetailedScreen(
                 if (dialogState) {
                     DatePickerDialog(onDateSelected = {
                         viewModel.setLocalDate(it)
-                    }) {
+                    }, onCloseDialog = {
                         viewModel.commandDialog(false)
-                    }
+                    })
                 } else {
                     Text(modifier = Modifier.clickable {
                         viewModel.commandDialog(true)
                     }, text = state.localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
                 }
-
             }
         } else {
             Box(

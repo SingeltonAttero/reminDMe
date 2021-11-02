@@ -1,4 +1,4 @@
-package ru.weber.remindme.ui.component.datepicker
+package ru.weber.remindme.ui.feature.datepicker
 
 import android.view.ContextThemeWrapper
 import android.widget.CalendarView
@@ -9,8 +9,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -18,17 +17,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.hilt.navigation.compose.hiltViewModel
 import ru.weber.remindme.R
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 
 @Composable
 fun DatePickerDialog(
     onDateSelected: (LocalDate) -> Unit,
-    onCloseDialog: () -> Unit
+    onCloseDialog: () -> Unit,
+    viewModel: DatePickerViewModel = hiltViewModel()
 ) {
-    val selDate = remember { mutableStateOf(LocalDate.now()) }
+    val state = viewModel.state.collectAsState().value
 
     Dialog(onDismissRequest = { onCloseDialog() }, properties = DialogProperties()) {
         Column(
@@ -58,7 +58,7 @@ fun DatePickerDialog(
                 Spacer(modifier = Modifier.size(24.dp))
 
                 Text(
-                    text = selDate.value.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                    text = state.titleSelectDate,
                     style = MaterialTheme.typography.h4,
                     color = MaterialTheme.colors.onPrimary
                 )
@@ -67,7 +67,7 @@ fun DatePickerDialog(
             }
 
             CustomCalendarView(onDateSelected = { year: Int, month: Int, dayOfMonth: Int ->
-                selDate.value = LocalDate.of(year, month, dayOfMonth)
+                viewModel.selectNewDate(year, month, dayOfMonth)
             })
 
             Spacer(modifier = Modifier.size(8.dp))
@@ -89,7 +89,7 @@ fun DatePickerDialog(
 
                 TextButton(
                     onClick = {
-                        onDateSelected.invoke(selDate.value)
+                        onDateSelected.invoke(state.currentDate)
                         onCloseDialog.invoke()
                     }
                 ) {
@@ -110,12 +110,12 @@ private fun CustomCalendarView(onDateSelected: (year: Int, month: Int, dayOfMont
     // Adds view to Compose
     AndroidView(
         modifier = Modifier.wrapContentSize(),
-        factory = { context ->
+        factory = { context -> 
             CalendarView(ContextThemeWrapper(context, R.style.CalenderViewCustom))
         },
         update = { view ->
             view.setOnDateChangeListener { _, year, month, dayOfMonth ->
-                onDateSelected.invoke(year, month, dayOfMonth)
+                onDateSelected.invoke(year, month, dayOfMonth + 1)
             }
         }
     )
