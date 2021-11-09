@@ -2,8 +2,9 @@ package ru.weber.remindme.domain.interactor.date
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import javax.inject.Inject
 
-class DateInteractor {
+class DateInteractor @Inject constructor() {
 
     val currentDate: LocalDate
         get() = LocalDate.now()
@@ -16,7 +17,7 @@ class DateInteractor {
     }
 
     fun createLocalDate(year: Int, month: Int, dayOfMonth: Int): LocalDate {
-        return LocalDate.of(year, month, dayOfMonth)
+        return LocalDate.of(year, month + 1, dayOfMonth)
     }
 
 }

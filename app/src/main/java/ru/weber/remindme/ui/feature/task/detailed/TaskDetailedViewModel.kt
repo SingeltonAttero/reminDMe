@@ -1,18 +1,20 @@
 package ru.weber.remindme.ui.feature.task.detailed
 
-import dagger.hilt.android.scopes.ViewModelScoped
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import ru.weber.remindme.commons.BaseViewModel
+import ru.weber.remindme.domain.interactor.date.DateInteractor
 import ru.weber.remindme.ui.feature.task.detailed.state.TaskDetailedState
 import java.time.LocalDate
 import javax.inject.Inject
 
-@ViewModelScoped
-class TaskDetailedViewModel @Inject constructor() : BaseViewModel() {
+@HiltViewModel
+class TaskDetailedViewModel @Inject constructor(private val dateInteractor: DateInteractor) :
+    BaseViewModel() {
 
     private val mutableState: MutableStateFlow<TaskDetailedState> =
         MutableStateFlow(TaskDetailedState.Loading)
@@ -38,7 +40,10 @@ class TaskDetailedViewModel @Inject constructor() : BaseViewModel() {
         launch {
             mutableState.emit(
                 mutableState.value.reducerState(
-                    TaskDetailedState.Result(textValue = text)
+                    TaskDetailedState.Result(
+                        textValue = text,
+                        dateField = dateInteractor.parseDate()
+                    )
                 )
             )
         }
@@ -48,7 +53,7 @@ class TaskDetailedViewModel @Inject constructor() : BaseViewModel() {
         launch {
             mutableState.emit(
                 mutableState.value.reducerState(
-                    TaskDetailedState.Result(localDate = date)
+                    TaskDetailedState.Result(dateField = dateInteractor.parseDate(date))
                 )
             )
         }

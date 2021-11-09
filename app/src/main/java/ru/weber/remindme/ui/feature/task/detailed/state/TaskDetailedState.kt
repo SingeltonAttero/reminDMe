@@ -1,7 +1,5 @@
 package ru.weber.remindme.ui.feature.task.detailed.state
 
-import java.time.LocalDate
-
 sealed class TaskDetailedState {
 
     object Loading : TaskDetailedState()
@@ -9,7 +7,7 @@ sealed class TaskDetailedState {
     data class Result(
         val editMode: Boolean = false,
         val textValue: String = "",
-        val localDate: LocalDate = LocalDate.now()
+        val dateField: String = ""
     ) : TaskDetailedState()
 
     fun reducerState(
@@ -24,7 +22,7 @@ sealed class TaskDetailedState {
                     is Result -> Result(
                         editMode = newState.editMode,
                         textValue = newState.textValue,
-                        localDate = newState.localDate
+                        dateField = newState.dateField
                     )
                 }
             }
@@ -35,7 +33,7 @@ sealed class TaskDetailedState {
                         this.copy(
                             editMode = newState.editMode,
                             textValue = newState.textValue,
-                            localDate = newState.localDate
+                            dateField = newState.dateField
                         )
                     }
                 }

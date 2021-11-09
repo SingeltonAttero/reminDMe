@@ -19,7 +19,6 @@ import ru.weber.remindme.ui.component.toolbar.AppToolbar
 import ru.weber.remindme.ui.component.toolbar.ToolbarTitle
 import ru.weber.remindme.ui.feature.datepicker.DatePickerDialog
 import ru.weber.remindme.ui.feature.task.detailed.state.TaskDetailedState
-import java.time.format.DateTimeFormatter
 
 @Composable
 fun TaskDetailedScreen(
@@ -65,7 +64,7 @@ fun TaskDetailedScreen(
                 } else {
                     Text(modifier = Modifier.clickable {
                         viewModel.commandDialog(true)
-                    }, text = state.localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
+                    }, text = state.dateField)
                 }
             }
         } else {

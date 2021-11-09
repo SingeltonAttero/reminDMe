@@ -52,7 +52,7 @@ fun DatePickerDialog(
                 Text(
                     text = stringResource(R.string.select_date_remind).uppercase(),
                     style = MaterialTheme.typography.caption,
-                    color = MaterialTheme.colors.onPrimary
+                    color = MaterialTheme.colors.onSurface
                 )
 
                 Spacer(modifier = Modifier.size(24.dp))
@@ -60,7 +60,7 @@ fun DatePickerDialog(
                 Text(
                     text = state.titleSelectDate,
                     style = MaterialTheme.typography.h4,
-                    color = MaterialTheme.colors.onPrimary
+                    color = MaterialTheme.colors.onSurface
                 )
 
                 Spacer(modifier = Modifier.size(16.dp))
@@ -110,7 +110,7 @@ private fun CustomCalendarView(onDateSelected: (year: Int, month: Int, dayOfMont
     // Adds view to Compose
     AndroidView(
         modifier = Modifier.wrapContentSize(),
-        factory = { context -> 
+        factory = { context ->
             CalendarView(ContextThemeWrapper(context, R.style.CalenderViewCustom))
         },
         update = { view ->
