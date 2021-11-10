@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import ru.weber.remindme.R
+import ru.weber.remindme.ui.component.date.TextFieldDate
 import ru.weber.remindme.ui.component.toolbar.AppToolbar
 import ru.weber.remindme.ui.component.toolbar.ToolbarTitle
 import ru.weber.remindme.ui.feature.datepicker.DatePickerDialog
@@ -42,6 +43,8 @@ fun TaskDetailedScreen(
                     .padding(paddingValues)
                     .padding(horizontal = 16.dp, vertical = 16.dp)
             ) {
+                DateTextField(dialogState, viewModel, state)
+                Spacer(Modifier.padding(8.dp))
                 OutlinedTextField(
                     modifier = Modifier.fillMaxWidth(),
                     value = state.textValue,
@@ -55,17 +58,7 @@ fun TaskDetailedScreen(
                         }
                     })
 
-                if (dialogState) {
-                    DatePickerDialog(onDateSelected = {
-                        viewModel.setLocalDate(it)
-                    }, onCloseDialog = {
-                        viewModel.commandDialog(false)
-                    })
-                } else {
-                    Text(modifier = Modifier.clickable {
-                        viewModel.commandDialog(true)
-                    }, text = state.dateField)
-                }
+
             }
         } else {
             Box(
@@ -78,4 +71,22 @@ fun TaskDetailedScreen(
             }
         }
     }
+}
+
+@Composable
+private fun DateTextField(
+    dialogState: Boolean,
+    viewModel: TaskDetailedViewModel,
+    state: TaskDetailedState.Result
+) {
+    if (dialogState) {
+        DatePickerDialog(onDateSelected = {
+            viewModel.setLocalDate(it)
+        }, onCloseDialog = {
+            viewModel.commandDialog(false)
+        })
+    }
+    TextFieldDate(dateField = state.dateField, modifier = Modifier.clickable {
+        viewModel.commandDialog(true)
+    })
 }

@@ -112,10 +112,11 @@ private fun CustomCalendarView(onDateSelected: (year: Int, month: Int, dayOfMont
         modifier = Modifier.wrapContentSize(),
         factory = { context ->
             CalendarView(ContextThemeWrapper(context, R.style.CalenderViewCustom))
+
         },
         update = { view ->
             view.setOnDateChangeListener { _, year, month, dayOfMonth ->
-                onDateSelected.invoke(year, month, dayOfMonth + 1)
+                onDateSelected.invoke(year, month, dayOfMonth)
             }
         }
     )
