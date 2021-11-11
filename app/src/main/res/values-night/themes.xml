@@ -26,6 +26,7 @@
     <style name="CalenderViewCustom"
         parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
         <item name="colorAccent">?attr/colorOnSurface</item>
+        <item name="colorSurface">@color/primary_accent_light</item>
         <item name="android:selectedWeekBackgroundColor">@color/primary_text_error_dark</item>
     </style>
 </resources>

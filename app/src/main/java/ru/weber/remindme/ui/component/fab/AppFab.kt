@@ -24,14 +24,16 @@ fun AppExtendedFAB(
     clickFAB: () -> Unit
 ) {
     ExtendedFloatingActionButton(
-        contentColor = MaterialTheme.colors.surface,
+        contentColor = MaterialTheme.colors.primary,
+        backgroundColor = MaterialTheme.colors.secondary,
         text = {
-            Text(text = stringResource(id = state.name))
+            Text(text = stringResource(id = state.name), style = MaterialTheme.typography.body1)
         },
         icon = {
             Icon(
                 painter = painterResource(id = state.drawableRes),
-                contentDescription = stringResource(id = state.name)
+                contentDescription = stringResource(id = state.name),
+                tint = MaterialTheme.colors.primary
             )
         },
         onClick = {
@@ -46,14 +48,16 @@ fun AppCircleFAB(
     clickFAB: () -> Unit
 ) {
     FloatingActionButton(
-        contentColor = MaterialTheme.colors.surface,
+        contentColor = MaterialTheme.colors.primary,
+        backgroundColor = MaterialTheme.colors.secondary,
         onClick = {
             clickFAB.invoke()
         },
     ) {
         Icon(
             painter = painterResource(id = state.drawableRes),
-            contentDescription = state.drawableRes.toString()
+            contentDescription = state.drawableRes.toString(),
+            tint = MaterialTheme.colors.primary
         )
     }
 }

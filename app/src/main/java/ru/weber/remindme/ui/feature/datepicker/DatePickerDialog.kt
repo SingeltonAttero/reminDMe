@@ -83,7 +83,6 @@ fun DatePickerDialog(
                     Text(
                         text = stringResource(R.string.cancel),
                         style = MaterialTheme.typography.button,
-                        color = MaterialTheme.colors.onPrimary
                     )
                 }
 
@@ -95,8 +94,7 @@ fun DatePickerDialog(
                 ) {
                     Text(
                         text = stringResource(R.string.select),
-                        style = MaterialTheme.typography.button,
-                        color = MaterialTheme.colors.onPrimary
+                        style = MaterialTheme.typography.button
                     )
                 }
 
@@ -112,7 +110,6 @@ private fun CustomCalendarView(onDateSelected: (year: Int, month: Int, dayOfMont
         modifier = Modifier.wrapContentSize(),
         factory = { context ->
             CalendarView(ContextThemeWrapper(context, R.style.CalenderViewCustom))
-
         },
         update = { view ->
             view.setOnDateChangeListener { _, year, month, dayOfMonth ->

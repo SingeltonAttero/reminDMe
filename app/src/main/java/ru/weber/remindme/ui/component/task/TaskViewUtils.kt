@@ -25,7 +25,7 @@ fun BaseCardTask(
             .wrapContentHeight()
             .padding(horizontal = 8.dp, vertical = 4.dp),
         shape = MaterialTheme.shapes.medium,
-        backgroundColor = MaterialTheme.colors.primaryVariant,
+        backgroundColor = MaterialTheme.colors.surface,
         elevation = 6.dp
     ) {
         composable.invoke()

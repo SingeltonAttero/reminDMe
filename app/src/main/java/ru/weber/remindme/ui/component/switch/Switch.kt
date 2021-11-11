@@ -36,7 +36,7 @@ fun AppSwitch(
         shape = MaterialTheme.shapes.small,
         modifier = Modifier
             .padding(vertical = 16.dp, horizontal = 6.dp),
-        backgroundColor = MaterialTheme.colors.primaryVariant,
+        backgroundColor = MaterialTheme.colors.surface,
         elevation = 8.dp
     ) {
         Row(modifier = Modifier

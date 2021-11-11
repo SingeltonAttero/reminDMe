@@ -2,18 +2,46 @@ package ru.weber.remindme.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// colors dark theme
-val PrimaryDark = Color(0xFF222831)
-val PrimaryVariantDark = Color(0xFF393E46)
-val SurfaceDark = Color(0xFFCEC9C9)
-val PrimaryAccentDark = Color(0xFF00ADB5)
-val PrimaryTextDark = Color(0xFFF8F0DF)
-val PrimaryTextErrorDark = Color(0xFFF44336)
+object LightColor {
+    val primary: Color = Color(0xFF455A64)
+    val primaryVariant: Color = Color(0xFF607D8B)
+    val secondary: Color = Color(0xFF00BCD4)
+    val secondaryVariant: Color = Color(0xFF018786)
 
-// colors light theme
-val PrimaryLight = Color(0xFF80CBC4)
-val PrimaryVariantLight = Color(0xFFFEFBF3)
-val SurfaceLight = Color(0xFF3B3F47)
-val PrimaryAccentLight = Color(0xFFF8F0DF)
-val PrimaryTextLight = Color(0xFF222831)
-val PrimaryTextErrorLight = Color(0xFFF44336)
+    val background: Color = Color.White
+    val surface: Color = Color.White
+    val error: Color = Color(0xFFFF5722)
+
+    val onPrimary: Color = Color.White
+    val onSecondary: Color = Color.Black
+    val onBackground: Color = Color.Black
+    val onSurface: Color = Color.Black
+    val onError: Color = Color.White
+
+    val textAndIcon = Color(0xFFFFFFFF)
+    val primaryText = Color(0xFF212121)
+    val secondaryText = Color(0xFF757575)
+    val divider = Color(0xFFBDBDBD)
+}
+
+object DarkColor {
+    val primary: Color = Color(0xFF102027)
+    val primaryVariant: Color = Color(0xFF62727b)
+    val secondary: Color = Color(0xFF4f5b62)
+    val secondaryVariant: Color = Color(0xFF4f5b62)
+
+    val background: Color = Color.White
+    val surface: Color = Color.White
+    val error: Color = Color(0xFFFF5722)
+
+    val onPrimary: Color = Color.White
+    val onSecondary: Color = Color.Black
+    val onBackground: Color = Color.Black
+    val onSurface: Color = Color.Black
+    val onError: Color = Color.White
+
+    val textAndIcon = Color(0xFFFFFFFF)
+    val primaryText = Color(0xFFFFFFFF)
+    val secondaryText = Color(0xFFE0E0E0)
+    val divider = Color(0xFFBDBDBD)
+}
