@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+option java_package = "ru.weber.remindme.data.datastore";
+option java_multiple_files = true;
+
+message AppSetting{
+  bool dark_theme = 1;
+}
