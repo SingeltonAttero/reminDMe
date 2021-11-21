@@ -2,10 +2,7 @@ package ru.weber.remindme.ui.feature.task.detailed
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -56,7 +53,12 @@ fun TaskDetailedScreen(
                                 text = stringResource(R.string.write_what_do_it_hint)
                             )
                         }
-                    })
+                    },
+                    colors = TextFieldDefaults.outlinedTextFieldColors(
+                        focusedBorderColor = MaterialTheme.colors.onSecondary,
+                        unfocusedBorderColor = MaterialTheme.colors.onSecondary.copy(alpha = 0.7F)
+                    )
+                )
 
 
             }

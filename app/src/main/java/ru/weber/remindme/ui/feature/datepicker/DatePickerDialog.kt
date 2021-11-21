@@ -52,7 +52,7 @@ fun DatePickerDialog(
                 Text(
                     text = stringResource(R.string.select_date_remind).uppercase(),
                     style = MaterialTheme.typography.caption,
-                    color = MaterialTheme.colors.onSurface
+                    color = MaterialTheme.colors.surface
                 )
 
                 Spacer(modifier = Modifier.size(24.dp))
@@ -60,7 +60,7 @@ fun DatePickerDialog(
                 Text(
                     text = state.titleSelectDate,
                     style = MaterialTheme.typography.h4,
-                    color = MaterialTheme.colors.onSurface
+                    color = MaterialTheme.colors.surface
                 )
 
                 Spacer(modifier = Modifier.size(16.dp))

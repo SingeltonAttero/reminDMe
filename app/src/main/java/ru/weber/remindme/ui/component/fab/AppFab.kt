@@ -4,6 +4,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import ru.weber.remindme.ui.theme.LightColor
 
 
 @Composable
@@ -27,13 +28,17 @@ fun AppExtendedFAB(
         contentColor = MaterialTheme.colors.primary,
         backgroundColor = MaterialTheme.colors.secondary,
         text = {
-            Text(text = stringResource(id = state.name), style = MaterialTheme.typography.body1)
+            Text(
+                text = stringResource(id = state.name),
+                style = MaterialTheme.typography.body1,
+                color = LightColor.textAndIcon
+            )
         },
         icon = {
             Icon(
                 painter = painterResource(id = state.drawableRes),
                 contentDescription = stringResource(id = state.name),
-                tint = MaterialTheme.colors.primary
+                tint = LightColor.textAndIcon
             )
         },
         onClick = {
@@ -57,7 +62,7 @@ fun AppCircleFAB(
         Icon(
             painter = painterResource(id = state.drawableRes),
             contentDescription = state.drawableRes.toString(),
-            tint = MaterialTheme.colors.primary
+            tint = LightColor.textAndIcon
         )
     }
 }

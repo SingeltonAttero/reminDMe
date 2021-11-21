@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import ru.weber.remindme.ui.theme.LightColor
 
 
 @Composable
@@ -28,7 +29,7 @@ fun AppToolbar(
                 Icon(
                     imageVector = Icons.Default.Close,
                     contentDescription = toolbarTitle.title(),
-                    tint = MaterialTheme.colors.onSurface
+                    tint = LightColor.textAndIcon
                 )
             }
         }
@@ -37,7 +38,8 @@ fun AppToolbar(
                 .padding(if (toolbarTitle.backPressedIcon) 0.dp else 16.dp)
                 .fillMaxWidth(),
             text = toolbarTitle.title(),
-            style = style
+            style = style,
+            color = LightColor.textAndIcon
         )
     }
 }

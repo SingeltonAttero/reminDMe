@@ -42,7 +42,7 @@ fun textDecorationFromTaskState(state: TaskState): TextDecoration =
 @Composable
 fun colorFromTaskStatus(state: TaskState): Color =
     when (state.status) {
-        TaskStatus.COMPLETE, TaskStatus.PROCESS -> MaterialTheme.colors.onSurface
+        TaskStatus.COMPLETE, TaskStatus.PROCESS -> MaterialTheme.colors.onSecondary
         TaskStatus.CANCELED -> MaterialTheme.colors.error
     }
 

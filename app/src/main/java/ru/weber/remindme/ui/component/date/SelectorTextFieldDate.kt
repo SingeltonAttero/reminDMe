@@ -33,7 +33,7 @@ fun TextFieldDate(
                 .padding(top = 8.dp)
                 .border(
                     1.dp,
-                    SolidColor(MaterialTheme.colors.onSurface),
+                    SolidColor(MaterialTheme.typography.body1.color),
                     RoundedCornerShape(8.dp)
                 )
                 .fillMaxWidth(1F)
@@ -41,12 +41,14 @@ fun TextFieldDate(
                 .padding(8.dp)
         ) {
             Text(
-                text = dateField, modifier = Modifier.padding(end = 16.dp)
+                text = dateField,
+                modifier = Modifier.padding(end = 16.dp),
+                style = MaterialTheme.typography.body1
             )
             Icon(
                 painter = iconDrawable,
                 contentDescription = dateField,
-                tint = MaterialTheme.colors.onSurface
+                tint = MaterialTheme.typography.body1.color
             )
         }
     }
