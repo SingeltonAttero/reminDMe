@@ -1,6 +1,5 @@
 package ru.weber.remindme.ui.component.toolbar
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -19,6 +18,7 @@ fun AppToolbar(
     toolbarTitle: ToolbarTitle,
     backgroundColor: Color = MaterialTheme.colors.primaryVariant,
     style: TextStyle = MaterialTheme.typography.h6,
+    actionContent: @Composable () -> Unit = {},
     backPressedClick: () -> Unit = {}
 ) {
     TopAppBar(backgroundColor = backgroundColor) {
@@ -33,14 +33,16 @@ fun AppToolbar(
                 )
             }
         }
+
         Text(
             modifier = Modifier
-                .padding(if (toolbarTitle.backPressedIcon) 0.dp else 16.dp)
-                .fillMaxWidth(),
+                .padding(if (toolbarTitle.backPressedIcon) 0.dp else 16.dp),
             text = toolbarTitle.title(),
             style = style,
             color = LightColor.textAndIcon
         )
+        actionContent.invoke()
+
     }
 }
 

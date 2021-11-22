@@ -5,8 +5,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ru.weber.remindme.domain.interactor.SettingInteractor
+import ru.weber.remindme.domain.interactor.TaskInteractor
 import ru.weber.remindme.domain.interactor.date.DateInteractor
 import ru.weber.remindme.domain.repository.SettingRepository
+import ru.weber.remindme.domain.repository.TaskRepository
 import javax.inject.Singleton
 
 
@@ -16,12 +18,17 @@ object DomainProviderModuleDI {
 
     @Singleton
     @Provides
-    fun providerSettingInteractor(settingRepository: SettingRepository) =
+    fun providerSettingInteractor(settingRepository: SettingRepository): SettingInteractor =
         SettingInteractor(settingRepository = settingRepository)
 
     @Singleton
     @Provides
-    fun providerDateInteractor() = DateInteractor()
+    fun providerDateInteractor(): DateInteractor = DateInteractor()
+
+    @Provides
+    @Singleton
+    fun providesTaskInteractor(taskRepository: TaskRepository): TaskInteractor =
+        TaskInteractor(taskRepository)
 }
 
 @Module

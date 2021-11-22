@@ -29,7 +29,21 @@ fun TaskDetailedScreen(
     val dialogState = viewModel.commandOpenDialog.collectAsState(initial = false).value
     Scaffold(
         topBar = {
-            AppToolbar(toolbarTitle = ToolbarTitle(title = titleTask, true)) {
+            AppToolbar(toolbarTitle = ToolbarTitle(title = titleTask, true), actionContent = {
+                if (state is TaskDetailedState.Result && state.isVisibleDone) {
+                    TextButton(onClick = {
+                        viewModel.saveTask()
+                        navHostController.popBackStack()
+                    }) {
+                        Text(
+                            text = "Done",
+                            Modifier.padding(start = 16.dp, end = 16.dp),
+                            style = MaterialTheme.typography.caption,
+
+                            )
+                    }
+                }
+            }) {
                 navHostController.popBackStack()
             }
         }

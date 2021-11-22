@@ -8,7 +8,10 @@ sealed class TaskDetailedState {
         val editMode: Boolean = false,
         val textValue: String = "",
         val dateField: String = ""
-    ) : TaskDetailedState()
+    ) : TaskDetailedState() {
+        val isVisibleDone: Boolean = textValue.isNotBlank() && dateField.isNotBlank()
+    }
+
 
     fun reducerState(
         newState: TaskDetailedState
